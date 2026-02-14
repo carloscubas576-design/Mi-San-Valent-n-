@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+/* --- PALETA DE COLORES (NOCHE ROMÁNTICA/ELEGANTE) --- */
+:root {
+    --fondo-dark-1: #0f0c29;
+    --fondo-dark-2: #302b63;
+    --texto-oro: #f4e4c1; 
+    --corazon-gradiente-1: #d81b60; /* Rosa fuerte */
+    --corazon-gradiente-2: #8e24aa; /* Morado místico */
+}
+
+/* --- CONFIGURACIÓN GENERAL --- */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--fondo-dark-1), var(--fondo-dark-2));
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--texto-oro);
+}
+
+/* --- FONDO ANIMADO --- */
+.decoracion {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.decoracion span {
+    position: absolute;
+    display: block;
+    animation: flotar linear infinite;
+    opacity: 0.7;
+    user-select: none;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+@keyframes flotar {
+    0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.contenedor-pregunta {
+    z-index: 2;
+    text-align: center;
+    transition: opacity 0.5s ease;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 65px;
+    color: var(--texto-oro);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 15px rgba(244, 228, 193, 0.4);
+    padding: 0 15px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 17px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(to right, var(--corazon-gradiente-2), var(--corazon-gradiente-1));
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(123, 31, 162, 0.4);
+    border: 2px solid transparent;
+    max-width: 90%;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(194, 24, 91, 0.6);
+    background: linear-gradient(to right, var(--corazon-gradiente-1), var(--corazon-gradiente-2));
+    border-color: rgba(255,255,255,0.4);
+}
+
+/* --- CORAZÓN GIGANTE --- */
+.contenedor-corazon {
+    display: none;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+}
+
+.corazon {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(to bottom right, var(--corazon-gradiente-1), var(--corazon-gradiente-2));
+    transform: rotate(-45deg);
+    animation: latido 1.4s infinite ease-in-out;
+    box-shadow: -5px 15px 100px rgba(194, 24, 91, 0.6), inset 0 0 20px rgba(255,255,255,0.2);
+}
+
+.corazon::before,
+.corazon::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(to bottom right, var(--corazon-gradiente-1), var(--corazon-gradiente-2));
+    border-radius: 50%;
+}
+
+.corazon::before { top: -110px; left: 0; }
+.corazon::after { left: 110px; top: 0; }
+
+@keyframes latido {
+    0% { transform: rotate(-45deg) scale(1); filter: brightness(1); }
+    25% { transform: rotate(-45deg) scale(1.1); filter: brightness(1.2); }
+    50% { transform: rotate(-45deg) scale(1); filter: brightness(1); }
+    100% { transform: rotate(-45deg) scale(1); filter: brightness(1); }
+}
+
+/* TEXTO DENTRO DEL CORAZÓN (Ajustado) */
+.texto-mensaje {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(45deg); 
+    color: white;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    padding-top: 10px;
+    padding-bottom: 30px; 
+    padding-left: 15px;
+    padding-right: 15px;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<audio id="musica" loop>
+    <source src="San Valentín.mp3" type="audio/mpeg">
+</audio>
+
+<div class="decoracion" id="decoracion"></div>
+
+<div class="contenedor-pregunta" id="pantalla1">
+    <h1>¿Quieres ser mi San Valentín? 💘</h1>
+    <div class="botones">
+        <button onclick="responder('si')">A) Siii, obvio ✨</button>
+        <button onclick="responder('claro')">B) Mmm... bueno ya 😏</button>
+    </div>
+</div>
+
+<div class="contenedor-corazon" id="pantalla2">
+    <div class="corazon">
+        <div class="texto-mensaje" id="mensajeFinal"></div>
+    </div>
+</div>
+
+<script>
+    // --- LÓGICA DE FONDO ---
+    const decoracion = document.getElementById("decoracion");
+    const emojis = ["✨", "💖", "💘", "🌙", "😍", "💫", "🌹"];
+
+    function crearEmoji() {
+        const span = document.createElement("span");
+        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + "vw";
+        const tamano = Math.random() * 25 + 10; 
+        span.style.fontSize = tamano + "px";
+        const duracion = Math.random() * 4 + 3; 
+        span.style.animationDuration = duracion + "s";
+        decoracion.appendChild(span);
+        setTimeout(() => { span.remove(); }, duracion * 1000);
+    }
+    setInterval(crearEmoji, 250);
+
+    // --- LÓGICA DE RESPUESTA ---
+    function responder(opcion) {
+        const pantalla1 = document.getElementById("pantalla1");
+        const pantalla2 = document.getElementById("pantalla2");
+        const mensajeFinal = document.getElementById("mensajeFinal");
+        const audio = document.getElementById("musica");
+
+        audio.play().catch(error => console.log(error));
+        audio.volume = 0.6;
+
+        pantalla1.style.opacity = "0"; 
+        setTimeout(() => {
+            pantalla1.style.display = "none";
+            pantalla2.style.display = "flex";
+        }, 500);
+
+        // RESPUESTAS COQUETAS (El punto medio)
+        if (opcion === 'si') {
+            mensajeFinal.innerHTML = "¡Lo sabía! ✨<br>Hacemos linda pareja...<br>de San Valentín 💘";
+        } else {
+            mensajeFinal.innerHTML = "¡Te atrapé! 😏<br>En el fondo sabías que querías...<br>Feliz día 💖";
+        }
+    }
+</script>
+
+</body>
+</html>
